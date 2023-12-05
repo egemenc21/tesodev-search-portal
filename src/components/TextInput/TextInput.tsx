@@ -1,25 +1,31 @@
 import './TextInputStyles.scss'
 
-interface InputTypes {
-  type: InputEnums
+interface Props{
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+interface InputTypes extends Props{
+  type: string;   
 }
 
 export enum InputEnums {
-  BASE,
-  BORDERED,
+  BASE = 'base', 
+  BORDERED = 'bordered', 
 }
 
-function BaseInput() {
-  return <input type="text" className="base-input" />
+
+function BaseInput({value, onChange}:Props) {
+  return <input type="text" className="base-input" value={value} onChange={onChange}/>
 }
 
-function BorderedInput() {
-  return <input type="text" className="base-input bordered" />
+function BorderedInput({value, onChange}:Props) {
+  return <input type="text" className="base-input bordered" value={value} onChange={onChange}/>
 }
 
-function Input({ type }: InputTypes) {
-  if (type == InputEnums.BASE) return <BaseInput/>
-  else if (type == InputEnums.BORDERED) return <BorderedInput/>
+function Input({ type,value, onChange }: InputTypes) {
+  if (type == InputEnums.BASE) return <BaseInput value={value} onChange={onChange}/>
+  else if (type == InputEnums.BORDERED) return <BorderedInput value={value} onChange={onChange}/>
   return 
 }
 
