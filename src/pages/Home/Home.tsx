@@ -7,13 +7,14 @@ import LargeTitle from '../../components/LargeTitle/LargeTitle'
 import HomeNavigation from '../../components/HomeNavigation/HomeNavigation'
 import mockData from '../../db/mock-data.json'
 import { useEffect, useState } from 'react'
+import Preview from '../../components/Preview/Preview'
 
 interface DataStructure {
   cols: string[];
   data: Array<Array<string | number>>;
 }
 
-interface RecordType {
+export interface RecordType {
   id: string
   nameSurname: string
   company: string
@@ -30,6 +31,7 @@ function Home() {
   const [query, setQuery] = useState('')
   const data:DataStructure = mockData
   const [records, setRecords] = useState<RecordType[]>([]);
+  const [filteredData, setFilteredData] = useState<RecordType[]>([]);
 
   useEffect(() => {
     if (data) {
@@ -50,6 +52,7 @@ function Home() {
     setQuery(userInput)
     
     const filteredResults = records.filter(record => record.nameSurname.toLowerCase().includes(userInput))
+    setFilteredData(filteredResults)
     console.log(userInput, filteredResults)
   }
   console.log(query)
@@ -67,6 +70,11 @@ function Home() {
           <Button>Search</Button>
         </Link>
       </div>
+      {
+        query === '' ? null : <Preview filteredData={filteredData}/>
+      }
+      
+
     </section>
   )
 }
