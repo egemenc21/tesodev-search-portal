@@ -8,6 +8,7 @@ import HomeNavigation from '../../components/HomeNavigation/HomeNavigation'
 import mockData from '../../db/mock-data.json'
 import { useEffect, useState } from 'react'
 import Preview from '../../components/Preview/Preview'
+import News from '../../components/News/News'
 
 interface DataStructure {
   cols: string[];
@@ -73,6 +74,7 @@ function Home() {
       {
         query === '' ? null : <Preview filteredData={filteredData}/>
       }
+      <News/>
       
 
     </section>
