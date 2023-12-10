@@ -37,7 +37,7 @@ function Slider({ slides }: SliderProps) {
       </div>
       
         {visibleSlides.map((slide) => (
-          <SliderItem index={slide.index} slide={slide} />
+          <SliderItem key={slide.index} slide={slide} />
         ))}
       
 

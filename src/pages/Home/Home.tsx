@@ -6,13 +6,15 @@ import SearchIcon from '../../assets/SearchIcon'
 import LargeTitle from '../../components/LargeTitle/LargeTitle'
 import HomeNavigation from '../../components/HomeNavigation/HomeNavigation'
 import mockData from '../../db/mock-data.json'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Preview from '../../components/Preview/Preview'
 import News from '../../components/News/News'
+import Footer from '../../components/Footer/Footer'
+import { QueryContext } from '../../context/Query'
 
 interface DataStructure {
-  cols: string[];
-  data: Array<Array<string | number>>;
+  cols: string[]
+  data: Array<Array<string | number>>
 }
 
 export interface RecordType {
@@ -25,35 +27,38 @@ export interface RecordType {
   country: string
   city: string
   date: string
-  [key: string]: string | number;
+  [key: string]: string | number
 }
 
 function Home() {
-  const [query, setQuery] = useState('')
-  const data:DataStructure = mockData
-  const [records, setRecords] = useState<RecordType[]>([]);
-  const [filteredData, setFilteredData] = useState<RecordType[]>([]);
+  const data: DataStructure = mockData
+  const { query, setQuery } = useContext(QueryContext)
+  const [records, setRecords] = useState<RecordType[]>([])
+  const [filteredData, setFilteredData] = useState<RecordType[]>([])
 
   useEffect(() => {
     if (data) {
-      const recordsArray: RecordType[] = data.data.map(row =>
+      const recordsArray: RecordType[] = data.data.map((row) =>
         row.reduce((acc, value, index) => {
-          acc[data.cols[index]] = value;
-          return acc;
+          acc[data.cols[index]] = value
+          return acc
         }, {} as RecordType)
-      );
-      setRecords(recordsArray);
-
-      console.log({records})
+      )
+      setRecords(recordsArray)     
+      localStorage.setItem('records',JSON.stringify(recordsArray))
     }
-  }, [data]);  
+  }, [data])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const userInput = e.target.value.toLowerCase()
     setQuery(userInput)
-    
-    const filteredResults = records.filter(record => record.nameSurname.toLowerCase().includes(userInput))
+
+    const filteredResults = records.filter((record) =>
+      record.nameSurname.toLowerCase().includes(userInput)
+    )
     setFilteredData(filteredResults)
+
+    localStorage.setItem('results',JSON.stringify(filteredResults))
     console.log(userInput, filteredResults)
   }
   console.log(query)
@@ -71,12 +76,13 @@ function Home() {
           <Button>Search</Button>
         </Link>
       </div>
-      {
-        query === '' ? null : <Preview filteredData={filteredData}/>
-      }
-      <News/>
-      
-
+      {query === '' ? (
+        <div className="filler"></div>
+      ) : (
+        <Preview filteredData={filteredData} />
+      )}
+      <News />
+      <Footer />
     </section>
   )
 }

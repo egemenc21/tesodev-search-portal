@@ -1,0 +1,27 @@
+.search-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  gap: 10px;
+  img{
+    width: 200px;
+  }
+  .search-area{
+    flex-basis: 60%;
+    display: flex;
+    gap: 5px;
+    .base-input{
+      padding: 0.7rem;
+    }
+  }
+  .new-record{
+    padding: 3rem;
+  }
+}
+
+@media(max-width:768px){
+  .search-navigation{
+    flex-direction: column;
+  }
+}

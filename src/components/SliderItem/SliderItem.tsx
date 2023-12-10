@@ -1,22 +1,20 @@
 import './SliderItemStyles.scss'
 interface SliderItemProps {
   slide: {
-    index:number
+    index: number
     image: string
     text: string
     updatedBy: string
   }
-  index:number
 }
 
-function SliderItem({ slide,index }: SliderItemProps) {
+function SliderItem({ slide }: SliderItemProps) {
   const { image, text, updatedBy } = slide
   return (
-    <div className='slider-item-container'>
+    <div className="slider-item-container">
       <img src={image} alt="street image" />
       <p>{text}</p>
       <div>{updatedBy}</div>
-      <div>current index: {index}</div>
     </div>
   )
 }

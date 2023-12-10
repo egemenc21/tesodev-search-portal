@@ -23,10 +23,10 @@ function BorderedInput({value, onChange}:Props) {
   return <input type="text" className="base-input bordered" value={value} onChange={onChange}/>
 }
 
-function Input({ type,value, onChange }: InputTypes) {
+function TextInput({ type,value, onChange }: InputTypes) {
   if (type == InputEnums.BASE) return <BaseInput value={value} onChange={onChange}/>
   else if (type == InputEnums.BORDERED) return <BorderedInput value={value} onChange={onChange}/>
   return 
 }
 
-export default Input
+export default TextInput
