@@ -2,7 +2,7 @@ import './TextInputStyles.scss'
 
 interface Props{
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 interface InputTypes extends Props{

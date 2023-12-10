@@ -9,27 +9,35 @@ import Results from '../../components/Results/Results'
 import { RecordType } from '../Home/Home'
 
 function Search() {
+  // const { slug } = useParams()
   const { query, setQuery } = useContext(QueryContext)
-  const [filteredResults, setFilteredResults] = useState<RecordType[]>([])
   const [records, setRecords] = useState<RecordType[]>([])
+  const [filteredRecords, setFilteredRecords] = useState<RecordType[]>([])
+
   useEffect(() => {
     const allRecords = localStorage.getItem('records')
-    const filteredResults = localStorage.getItem('results')
+    const filteredRecords = localStorage.getItem('results')
 
-    if (allRecords && filteredResults) {
-      setFilteredResults(JSON.parse(filteredResults))
+    if (allRecords && filteredRecords) {
       setRecords(JSON.parse(allRecords))
+      setFilteredRecords(JSON.parse(filteredRecords))
+      
     }
   }, [])
-  console.log(filteredResults)
+  
+  console.log({filteredRecords,records})
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const userInput = e.target.value.toLowerCase()
-    setQuery(userInput)
-    const filteredResults = records.filter((record) =>
-      record.nameSurname.toLowerCase().includes(userInput)
+    setQuery(userInput)    
+  }
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    const filteredRecords = records.filter((record) =>
+      record.nameSurname.toLowerCase().includes(query)
     )
-    setFilteredResults(filteredResults)
+    setFilteredRecords(filteredRecords)
   }
 
   return (
@@ -38,17 +46,17 @@ function Search() {
         <Link to="/">
           <img src={TesoDevLogo} alt="Tesodev Logo" />
         </Link>
-        <div className="search-area">
+        <form className="search-area" onSubmit={handleSubmit}>
           <TextInput
             type={InputEnums.BORDERED}
             value={query}
             onChange={onChange}
           />
           <Button>Search</Button>
-        </div>
+        </form>
         <Button className="new-record">Add new record</Button>
       </nav>
-      <Results filteredResults={filteredResults}/>
+      <Results filteredRecords={filteredRecords}/>
     </section>
   )
 }

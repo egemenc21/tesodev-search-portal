@@ -34,7 +34,7 @@ function Home() {
   const data: DataStructure = mockData
   const { query, setQuery } = useContext(QueryContext)
   const [records, setRecords] = useState<RecordType[]>([])
-  const [filteredData, setFilteredData] = useState<RecordType[]>([])
+  const [filteredRecords, setFilteredRecords] = useState<RecordType[]>([])
 
   useEffect(() => {
     if (data) {
@@ -56,7 +56,7 @@ function Home() {
     const filteredResults = records.filter((record) =>
       record.nameSurname.toLowerCase().includes(userInput)
     )
-    setFilteredData(filteredResults)
+    setFilteredRecords(filteredResults)
 
     localStorage.setItem('results',JSON.stringify(filteredResults))
     console.log(userInput, filteredResults)
@@ -79,7 +79,7 @@ function Home() {
       {query === '' ? (
         <div className="filler"></div>
       ) : (
-        <Preview filteredData={filteredData} />
+        <Preview filteredRecords={filteredRecords} />
       )}
       <News />
       <Footer />

@@ -3,22 +3,26 @@ import { RecordType } from '../../pages/Home/Home'
 import PreviewItem from '../PreviewItem/PreviewItem'
 
 import './PreviewStyles.scss'
+// import { useContext } from 'react'
+// import { QueryContext } from '../../context/Query'
 interface PreviewProps {
-  filteredData: RecordType[]
+  filteredRecords: RecordType[]
 }
 
 
 
-function Preview({ filteredData }: PreviewProps) {
+function Preview({ filteredRecords }: PreviewProps) {
   const navigate = useNavigate()
+  // const {query} = useContext(QueryContext)
   function onClick(){
-    navigate('/search/')
+    //slug buraya gelmeli
+    navigate(`/search/`)
   }
-  console.log(filteredData)
-  if (filteredData.length === 1000 || filteredData.length === 0) return
+  console.log(filteredRecords)
+  if (filteredRecords.length === 1000 || filteredRecords.length === 0) return
   return (
     <div className="previews-container">
-      {filteredData
+      {filteredRecords
         .map(({ id, nameSurname, company, country }) => (
           <PreviewItem            
             key={id}

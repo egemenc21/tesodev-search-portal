@@ -1,8 +1,38 @@
+import { RecordType } from '../../pages/Home/Home'
 import './ResultItemStyles.scss'
-// interface ResultItemProps {}
-
-function ResultItem() {
-  return <div> ResultItem </div>
+interface ResultItemProps {
+  record: RecordType
+  filteredRecords: RecordType[]
+  index: number
 }
 
-export default ResultItem;
+function ResultItem({ record, index, filteredRecords }: ResultItemProps) {
+  const { nameSurname, company, email, phone, website, country, city, date } =
+    record
+
+  return (
+    <div>
+      <div className="result">
+        <div>
+          <div>{nameSurname}</div>
+          <div>{email}</div>
+        </div>
+        <div>
+          <div>{website}</div>
+          <div>{phone}</div>
+        </div>
+        <div className="location">
+          <div>
+            {company}, {city}, {country}
+          </div>
+          <div>{date}</div>
+        </div>
+      </div>
+      {filteredRecords.length - 1 === index ? null : (
+        <div className="border-bottom"/>
+      )}
+    </div>
+  )
+}
+
+export default ResultItem
