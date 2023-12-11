@@ -11,6 +11,7 @@ import Preview from '../../components/Preview/Preview'
 import News from '../../components/News/News'
 import Footer from '../../components/Footer/Footer'
 import { QueryContext } from '../../context/Query'
+import { RecordsContext } from '../../context/Records'
 
 interface DataStructure {
   cols: string[]
@@ -33,9 +34,11 @@ export interface RecordType {
 function Home() {
   const data: DataStructure = mockData
   const { query, setQuery } = useContext(QueryContext)
-  const [records, setRecords] = useState<RecordType[]>([])
-  const [filteredRecords, setFilteredRecords] = useState<RecordType[]>([])
+  const { filteredRecords, setFilteredRecords } = useContext(RecordsContext)
 
+  const [records, setRecords] = useState<RecordType[]>([])
+
+  //use memoya bak
   useEffect(() => {
     if (data) {
       const recordsArray: RecordType[] = data.data.map((row) =>
@@ -72,7 +75,7 @@ function Home() {
           <SearchIcon />
           <Input type={InputEnums.BASE} onChange={handleChange} value={query} />
         </label>
-        <Link to="/search/">
+        <Link to={`/search/${query}`}>
           <Button>Search</Button>
         </Link>
       </div>

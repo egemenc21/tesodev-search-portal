@@ -2,11 +2,11 @@ import { RecordType } from '../../pages/Home/Home'
 import './ResultItemStyles.scss'
 interface ResultItemProps {
   record: RecordType
-  filteredRecords: RecordType[]
+  length: number
   index: number
 }
 
-function ResultItem({ record, index, filteredRecords }: ResultItemProps) {
+function ResultItem({ record, index, length }: ResultItemProps) {
   const { nameSurname, company, email, phone, website, country, city, date } =
     record
 
@@ -28,7 +28,7 @@ function ResultItem({ record, index, filteredRecords }: ResultItemProps) {
           <div>{date}</div>
         </div>
       </div>
-      {filteredRecords.length - 1 === index ? null : (
+      {length - 1 === index ? null : (
         <div className="border-bottom"/>
       )}
     </div>

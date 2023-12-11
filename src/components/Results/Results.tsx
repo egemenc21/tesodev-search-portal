@@ -1,21 +1,25 @@
 import './ResultsStyles.scss'
-import { RecordType } from '../../pages/Home/Home'
 import ResultItem from '../ResultItem/ResultItem'
-interface ResultsProps {
-  filteredRecords: RecordType[]
-}
+import { useContext } from 'react'
+import OrderBy from '../OrderBy/OrderBy'
+import { RecordsContext } from '../../context/Records'
 
-function Results({ filteredRecords }: ResultsProps) {
+function Results() {
+  const { filteredRecords } = useContext(RecordsContext)
+  
   return (
-    <div className="results">      
-      {filteredRecords.map((record, index) => (
-        <ResultItem
-          record={record}
-          key={record.id}
-          index={index}
-          filteredRecords={filteredRecords}
-        />
-      ))}
+    <div className="results-container">
+      <div className="results">
+        {filteredRecords.map((record, index) => (
+          <ResultItem
+            record={record}
+            key={record.id}
+            index={index}  
+            length={filteredRecords.length}          
+          />
+        ))}
+      </div>
+      <OrderBy />
     </div>
   )
 }
