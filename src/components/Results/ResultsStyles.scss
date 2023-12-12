@@ -1,17 +1,38 @@
-.results-container{
+@import '../../colors.scss';
+.results-container {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 80%;
   margin: 0 auto;
-   gap: 10px;
-
+  gap: 10px;
+  .results-orderby-container {
+    display: flex; 
+    width: 100%;   
+    gap: 10px;
+  }
+  .base {
+    padding: 0.2rem;
+  }
+  .active {
+    background-color: $secondary-color;
+    color: white;
+  }
 }
-.results{
+.results {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 1rem; 
+  padding: 1rem;
   flex-basis: 80%;
-  
+  width: 100%;
+
   border: 1px solid black;
   border-radius: 10px;
+}
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
 }

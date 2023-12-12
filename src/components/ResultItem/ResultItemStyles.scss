@@ -1,11 +1,13 @@
 .result {
   display: flex;
+  height: 80px;
   gap: 5px;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
   cursor: pointer;
   border-radius: 15px;
+  font-size: 14px;
   .location {
     color: var(--ink-lighter, #72777a);
   }

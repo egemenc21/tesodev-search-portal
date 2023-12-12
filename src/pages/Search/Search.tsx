@@ -41,7 +41,7 @@ function Search() {
     const queryInput = form.querySelector('input')
 
     if (queryInput) {
-      const query = queryInput.value
+      const query = queryInput.value.toLowerCase()
       console.log(query)
       setQuery(query)
 
