@@ -1,15 +1,16 @@
 @import '../../colors.scss';
+
 .results-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 80%;
+  height: 60vh;
   margin: 0 auto;
-  gap: 10px;
   .results-orderby-container {
-    display: flex; 
-    width: 100%;   
+    display: flex;
+    width: 100%;
     gap: 10px;
   }
   .base {

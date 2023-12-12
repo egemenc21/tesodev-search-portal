@@ -54,10 +54,9 @@ function Results() {
             {i}
           </span>
         )
-        
       }
-      
-      
+      if (currentPage <= 3) pageNumbers.push(<span key="dots1">...</span>)
+
       // if the current page is just after the third item
       if (currentPage === 4) {
         pageNumbers.push(
@@ -69,13 +68,12 @@ function Results() {
             {currentPage}
           </span>
         )
+        pageNumbers.push(<span key="dots2">...</span>)
       }
 
-      if(currentPage >= 3)
-      pageNumbers.push(<span key="dots">...</span>)
-      
-      // if the  current page is in between the last 3 and first 3 pages and not 4th and total pages - 3th 
+      // if the  current page is in between the last 3 and first 3 pages and not 4th and total pages - 3th
       if (currentPage > 4 && currentPage < totalPages - 3) {
+        pageNumbers.push(<span key="dots3">...</span>)
         for (let i = currentPage - 1; i <= currentPage + 1; i++) {
           pageNumbers.push(
             <span
@@ -87,10 +85,11 @@ function Results() {
             </span>
           )
         }
-        pageNumbers.push(<span key="dots">...</span>)
-        
+        pageNumbers.push(<span key="dots4">...</span>)
       }
 
+      if (currentPage >= totalPages - 3)
+        pageNumbers.push(<span key="dots5">...</span>)
       // if the current page is just before last the third item
       if (currentPage === totalPages - 3) {
         pageNumbers.push(
@@ -103,7 +102,6 @@ function Results() {
           </span>
         )
       }
-      
 
       // last three pages
       for (let i = totalPages - 2; i <= totalPages; i++) {
@@ -118,6 +116,7 @@ function Results() {
         )
       }
     }
+
     return pageNumbers
   }
   return (
