@@ -8,6 +8,7 @@ import cn from 'classnames'
 function Results() {
   const { filteredRecords } = useContext(RecordsContext)
 
+
   const itemsPerPage = 5
 
   const [currentPage, setCurrentPage] = useState(1)
@@ -119,6 +120,7 @@ function Results() {
 
     return pageNumbers
   }
+
   return (
     <div className="results-container">
       <div className="results-orderby-container">
@@ -136,6 +138,7 @@ function Results() {
       </div>
       <div className="pagination">
         <button
+          className="previous"
           disabled={currentPage === 1}
           onClick={() => handlePageChange(currentPage - 1)}
         >
@@ -145,6 +148,7 @@ function Results() {
         <button
           disabled={endIndex >= filteredRecords.length}
           onClick={() => handlePageChange(currentPage + 1)}
+          className="next"
         >
           Next
         </button>

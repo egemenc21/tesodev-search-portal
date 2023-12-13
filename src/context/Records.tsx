@@ -8,6 +8,7 @@ interface RecordsContextProps {
   orderByNameDesc: () => void
   orderByDateAsc: () => void
   orderByDateDesc: () => void
+  addNewRecord: (record:RecordType) => RecordType[]
 }
 
 export const RecordsContext = createContext<RecordsContextProps>({
@@ -17,6 +18,7 @@ export const RecordsContext = createContext<RecordsContextProps>({
   orderByNameDesc: () => {},
   orderByDateAsc: () => {},
   orderByDateDesc: () => {},
+  addNewRecord: () => [],
 })
 
 function sortByNameAsc(records: RecordType[]): RecordType[] {
@@ -32,12 +34,23 @@ function sortByNameDesc(records: RecordType[]): RecordType[] {
 }
 
 function sortByDateAsc(records: RecordType[]): RecordType[] {
-  return records.slice().sort((a, b) => a.date.localeCompare(b.date))
+  return records.slice().sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+
+    return dateA.getTime() - dateB.getTime();
+  });
 }
 
+
 function sortByDateDesc(records: RecordType[]): RecordType[] {
-  return records.slice().sort((a, b) => b.date.localeCompare(a.date))
+  return records.slice().sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    return dateB.getTime() - dateA.getTime()})
 }
+
+
 
 function RecordsProvider({ children }: { children: React.ReactNode }) {
   const [filteredRecords, setFilteredRecords] = useState<RecordType[]>([])
@@ -56,6 +69,13 @@ function RecordsProvider({ children }: { children: React.ReactNode }) {
     setFilteredRecords(sortByDateDesc(filteredRecords))
   }
 
+  const addNewRecord = (record: RecordType) => {
+    filteredRecords.push(record)
+    return filteredRecords
+  }
+
+  
+
   return (
     <RecordsContext.Provider
       value={{
@@ -65,6 +85,7 @@ function RecordsProvider({ children }: { children: React.ReactNode }) {
         orderByNameDesc,
         orderByDateAsc,
         orderByDateDesc,
+        addNewRecord,
       }}
     >
       {children}

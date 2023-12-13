@@ -4,12 +4,14 @@ import Home from './pages/Home/Home'
 import AddLink from './pages/AddLink/AddLink'
 import Search from './pages/Search/Search'
 
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
 
   return (    
     <Routes>
       <Route path="/" element={<Home/>}/>
-      <Route path="/search/:slug" element={<Search/>}/>
+      <Route path="search/*" element={<Search/>}/>
       <Route path="/add-link/" element={<AddLink/>}/>
     </Routes> 
   )

@@ -1,8 +1,13 @@
 .base-input {
   border-radius: 10px;
   padding: 0.5rem;
-  width: 100%;  
+  width: 100%;
+  transition: 0.5s;
 }
-.bordered{
-  border: 1px solid black;
+.bordered {
+  border: 1px solid #484848;
 }
+.base-input:hover {
+  background-color: rgba(100, 100, 100, 0.08);
+}
+

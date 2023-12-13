@@ -40,16 +40,21 @@ function Home() {
 
   //use memoya bak
   useEffect(() => {
-    if (data) {
+    const response = localStorage.getItem('records')
+    if(response)
+    setRecords(JSON.parse(response))
+  
+    if (!records && data) {
       const recordsArray: RecordType[] = data.data.map((row) =>
         row.reduce((acc, value, index) => {
           acc[data.cols[index]] = value
           return acc
         }, {} as RecordType)
       )
-      setRecords(recordsArray)     
-      localStorage.setItem('records',JSON.stringify(recordsArray))
+      setRecords(recordsArray)
+      localStorage.setItem('records', JSON.stringify(recordsArray))
     }
+
   }, [data])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,10 +66,9 @@ function Home() {
     )
     setFilteredRecords(filteredResults)
 
-    localStorage.setItem('results',JSON.stringify(filteredResults))
-    console.log(userInput, filteredResults)
+
   }
-  console.log(query)
+
 
   return (
     <section className="home-container">

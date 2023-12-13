@@ -19,4 +19,10 @@
   width: 100%;
   background: #7E7E7E;
   height: 1px;
+  margin-top: 0.5rem;
+}
+@media(max-width:768px){
+  .result{
+    font-size: 12px;
+  }
 }

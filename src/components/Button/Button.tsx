@@ -1,11 +1,13 @@
 import { HTMLAttributes } from 'react'
 import './ButtonStyle.scss'
 
-interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {}
+interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+  disabled?:boolean
+}
 
-function Button({ children }: ButtonProps) {
+function Button({ children, disabled }: ButtonProps) {
   return (
-    <button className="base-button" type="submit">
+    <button className="base-button" disabled={disabled} type="submit">
       {children}
     </button>
   )

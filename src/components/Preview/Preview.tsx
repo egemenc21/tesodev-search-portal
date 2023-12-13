@@ -14,11 +14,12 @@ interface PreviewProps {
 function Preview({ filteredRecords }: PreviewProps) {
   const navigate = useNavigate()
   const {query} = useContext(QueryContext)
+
   function onClick(){
-    //slug buraya gelmeli
-    navigate(`/search/${query}`)    
+    navigate(`/search/${query}`) 
+
   }
-  console.log(filteredRecords)
+
   if (filteredRecords.length === 1000 || filteredRecords.length === 0) return
   return (
     <div className="previews-container">

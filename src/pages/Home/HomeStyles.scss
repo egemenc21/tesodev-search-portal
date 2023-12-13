@@ -1,42 +1,45 @@
-.home-container{
+@import '../../colors.scss';
+.home-container {
   padding-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  .search-area{
-    display: flex; 
-    align-items: center;  
-    justify-content: center; 
+  .search-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
     width: 80%;
     margin: 0 auto;
-    
-    label{
+
+    label {
       flex-basis: 70%;
-      border: 1px solid black;
+      border: 1px solid #484848;
       border-radius: 10px;
       display: flex;
-      align-items: center;      
+      align-items: center;
       width: 100%;
       padding: 5px;
-     
-      
+      transition: 0.5s;
+    }
+    label:hover {
+      border: 1px solid rgba(72, 72, 72, 0.6);
+    }
+    label:focus{
+      border: 1px solid $primary-color;
     }
   }
-  .filler{
+  .filler {
     min-height: 350px;
     padding: 1rem;
     margin-top: 1rem;
-  
   }
-
 }
 
-@media(max-width:400px){
-  .search-area{
+@media (max-width: 400px) {
+  .search-area {
     flex-direction: column;
-    
   }
 }

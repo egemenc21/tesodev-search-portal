@@ -1,6 +1,10 @@
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './OrderByStyles.scss'
 import OrderByItem from '../OrderByItem/OrderByItem'
+import { RecordsContext } from '../../context/Records'
+import { OrderContext } from '../../context/Order'
+
+// import { OrderContext } from '../../context/Order'
 // interface OrderByProps {}
 
 const orderNames = [
@@ -12,28 +16,53 @@ const orderNames = [
 
 function OrderBy() {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedOrder, setSelectedOrder] = useState('');
+  // const [selectedOrder, setSelectedOrder] = useState('')
+  const {selectedOrder, setSelectedOrder} = useContext(OrderContext)
+
+  const { orderByNameAsc, orderByNameDesc, orderByDateAsc, orderByDateDesc } =
+    useContext(RecordsContext)
+
+  useEffect(() => {  
+
+    switch (selectedOrder) {
+      case 'Name ascending':
+        orderByNameAsc()
+        break
+      case 'Name descending':
+        orderByNameDesc()   
+        break
+      case 'Date ascending':
+        orderByDateAsc()
+        break
+      case 'Date descending':
+        orderByDateDesc()
+        break
+      default:
+        break
+    }
+  }, [selectedOrder])
 
   const handleOnClick = () => {
     setIsOpen(!isOpen)
-    console.log(isOpen)
   }
 
-  const handleOrderClick = (orderName:string) => {
-    setSelectedOrder(orderName);
-  };
-
-  
+  const handleOrderClick = (orderName: string) => {
+    setSelectedOrder(orderName)
+  }
 
   return (
-    <div className='order-by-container'>
+    <div className="order-by-container">
       <button onClick={handleOnClick} className="order-by-btn">
         Order by
       </button>
       {isOpen && (
         <ul className="order-by">
           {orderNames.map((name) => (
-            <OrderByItem orderName={name} isSelected={selectedOrder === name} onClick={handleOrderClick}/>
+            <OrderByItem
+              orderName={name}
+              isSelected={selectedOrder === name}
+              onClick={handleOrderClick}
+            />
           ))}
         </ul>
       )}
